@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { GroceriesList } from './Components/GroceriesList'
 import { ShoppingCart } from './Components/ShoppingCart'
+import { PaymentBill } from './Components/PaymentBill'
 import { groceries,shoppingCart } from './Local Data/data'
 import './App.css';
 
@@ -61,6 +62,11 @@ function App() {
           </div>    
           <div className="col-md-6 col-sm-12 alert alert-warning">
             <ShoppingCart header="Shopping Cart" data={shoppingCartItems} itemClicked={cartItemsClicked}/>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <PaymentBill />
           </div>
         </div>
       </div>
