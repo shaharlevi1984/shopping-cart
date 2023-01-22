@@ -8,11 +8,16 @@ import './App.css';
 function App() {
   const [groceriesItems, setGroceriesItems] = useState([])
   const [shoppingCartItems, setShoppingCartItems] = useState([])
+  const [paymentBill, setPaymentBill] = useState(0)
   // initilaize Grocories List & shoppingCart with useEffect Hook
   useEffect(() => {
     setGroceriesItems(groceries)
     setShoppingCartItems(shoppingCart)
   }, [], [])
+
+  useEffect(() => {
+    parseFloat(setPaymentBill(shoppingCartItems.reduce((sum, cartItem) => sum + cartItem.price, 0))).toFixed(2);
+  }, [shoppingCartItems])
 
   const groceriesItemsClicked = selectedItem => {
     const updateGroceries = groceriesItems.map(item => {
@@ -66,7 +71,7 @@ function App() {
         </div>
         <div className="row">
           <div className="col">
-            <PaymentBill />
+            <PaymentBill PaymentBill={paymentBill}/>
           </div>
         </div>
       </div>

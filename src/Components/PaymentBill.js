@@ -16,7 +16,7 @@ export function PaymentBill(props) {
                             </button>
                         </div>
                         <div className="modal-body">
-                            Your Total Payment: $
+                            Your Total Payment: {props.PaymentBill}$
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
