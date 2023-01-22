@@ -31,6 +31,26 @@ function App() {
     setGroceriesItems(updateGroceries)
   }
 
+  const cartItemsClicked = selectedItem => {
+    const cartItem = shoppingCartItems.find(item => item.id === selectedItem.id)
+    const item = groceriesItems.find(item => item.id === selectedItem.id)
+    cartItem.quantity--;
+    cartItem.price = parseFloat(item.price).toFixed(2) * parseFloat(cartItem.quantity).toFixed(2);
+
+    if (!cartItem.quantity) {
+      setShoppingCartItems(shoppingCartItems.filter(item => item.id !== selectedItem.id));
+    }
+
+    const updateGroceries = groceriesItems.map(item => {
+      if (item.id === selectedItem.id) {
+        item.quantity++
+      }
+      return item
+    })
+    setGroceriesItems(updateGroceries)
+  
+  }
+
   return (
     <div className="App">
 
@@ -40,7 +60,7 @@ function App() {
             <GroceriesList header="Groceries List" data={groceriesItems} itemClicked={groceriesItemsClicked} />
           </div>    
           <div className="col-md-6 col-sm-12 alert alert-warning">
-            <ShoppingCart header="Shopping Cart" data={shoppingCartItems} />
+            <ShoppingCart header="Shopping Cart" data={shoppingCartItems} itemClicked={cartItemsClicked}/>
           </div>
         </div>
       </div>
