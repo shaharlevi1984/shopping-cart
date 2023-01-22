@@ -10,7 +10,7 @@ export function GroceriesList(props) {
                   style={{cursor: item.quantity ? 'pointer' : 'not-allowed'}}>
                   {item.name} - Stock: {item.quantity} - price: {item.price}
                   <button type="button" id={item.id} className= {item.quantity ? 'btn btn-primary' : 'btn btn-info' }
-                  //onClick={() => props.itemClicked(item)}
+                  onClick={() => props.itemClicked(item)}
                   disabled= {item.quantity ? '' : 'disables'}> Add to Cart </button>
                   </li>)
               )

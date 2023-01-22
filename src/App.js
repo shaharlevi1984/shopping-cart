@@ -13,6 +13,23 @@ function App() {
     setShoppingCartItems(shoppingCart)
   }, [], [])
 
+  const groceriesItemsClicked = selectedItem => {
+    const updateGroceries = groceriesItems.map(item => {
+      if (item.id === selectedItem.id) {
+        item.quantity--
+        const cartItem = shoppingCartItems.find(item => item.id === selectedItem.id)
+        if (cartItem) {
+          cartItem.quantity++
+          cartItem.price = parseFloat(item.price).toFixed(2) * parseFloat(cartItem.quantity).toFixed(2);
+        } else {
+          const newItem = { ...selectedItem, quantity: 1 }
+          setShoppingCartItems(shoppingCartItems => [...shoppingCartItems, newItem]);
+        }
+      }
+      return item
+    })
+    setGroceriesItems(updateGroceries)
+  }
 
   return (
     <div className="App">
@@ -20,7 +37,7 @@ function App() {
       <div className="container-fluid mt-2">
         <div className="row">
           <div className="col-md-6 col-sm-12 alert alert-primary">
-            <GroceriesList header="Groceries List" data={groceriesItems} />
+            <GroceriesList header="Groceries List" data={groceriesItems} itemClicked={groceriesItemsClicked} />
           </div>    
           <div className="col-md-6 col-sm-12 alert alert-warning">
             <ShoppingCart header="Shopping Cart" data={shoppingCartItems} />
